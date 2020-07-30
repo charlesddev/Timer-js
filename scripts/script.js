@@ -3,32 +3,41 @@ const stopButton = document.getElementById("stopButton");
 const resetButton = document.getElementById("resetButton");
 let setTime = document.getElementById("time").innerHTML;
 let setTimeFixed;
+let clear;
 
 startButton.addEventListener("click", startTimer);
 stopButton.addEventListener("click", stopTimer);
 resetButton.addEventListener("click", resetTimer);
-setTime = parseFloat(setTime);
 
+stopButton.style.display = "none";
+resetButton.style.display = "none";
 
 
 function myTimer() {
+    setTime = parseFloat(setTime);
     setTime += 0.1;
     setTimeFixed = setTime.toFixed(1);
     document.getElementById("time").innerHTML = setTimeFixed;
 }
 
 function startTimer() {
-    setInterval(myTimer, 100)
-    document.getElementById("startButton").style.visibility = "hidden";
+    clear = setInterval(myTimer, 100)
+    startButton.style.display = "none";
+    stopButton.style.display = "initial";
+    resetButton.style.display = "initial";
 }
 
 function stopTimer() {
-   clearInterval(setTime);
-   document.getElementById("startButton").style.visibility = "initial";
+    clearInterval(clear);
+    startButton.style.display = "initial";
+    stopButton.style.display = "none";
 }
 
 function resetTimer() {
-    clearInterval(setTime);
+    clearInterval(clear);
     setTime = 0;
     document.getElementById("time").innerHTML = setTime;
+    startButton.style.display = "initial";
+    stopButton.style.display = "none";
+    resetButton.style.display = "none";
 }
