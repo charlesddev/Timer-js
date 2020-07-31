@@ -8,8 +8,6 @@ let setMinutes = parseInt(document.getElementById("minutes").innerHTML);
 let setHours = parseInt(document.getElementById("hours").innerHTML);
 let clear;
 
-setSeconds = 55;
-
 startButton.addEventListener("click", startTimer);
 stopButton.addEventListener("click", stopTimer);
 resetButton.addEventListener("click", resetTimer);
@@ -27,32 +25,34 @@ function fakeCentiSecs() {
 }
 
 function myTimer() {
-
     setSeconds++;
+    if (setSeconds > 59) {
+        setSeconds = 0;
+        document.getElementById("seconds").innerHTML = setSeconds;
+        setMinutes++;
+    }
+    if (setMinutes > 59) {
+        setMinutes = 0;
+        document.getElementById("minutes").innerHTML = setMinutes;
+        setHours++;
+    }
+
+    if (setMinutes < 10) {
+        document.getElementById("minutes").innerHTML = "0" + setMinutes;
+    }else {
+        document.getElementById("minutes").innerHTML = setMinutes;
+    }
+
     if (setSeconds < 10) {
         document.getElementById("seconds").innerHTML = "0" + setSeconds;
     } else {
         document.getElementById("seconds").innerHTML = setSeconds;
     }
 
-    if (setSeconds == 60) {
-        setSeconds = "0" + 0;
-        setMinutes++;
-        if (setMinutes < 10) {
-            document.getElementById("minutes").innerHTML = "0" + setMinutes;
-        } else {
-            document.getElementById("minutes").innerHTML = setMinutes;
-        }
-    }
-
-    if (setMinutes == 60) {
-        setMinutes = "0" + 0;
-        setHours++;
-        if (setHours < 10) {
-            document.getElementById("hours").innerHTML = "0" + setHours;
-        } else {
-            document.getElementById("hours").innerHTML = setHours;
-        }
+    if (setHours < 10) {
+        document.getElementById("hours").innerHTML = "0" + setHours;
+    } else {
+        document.getElementById("hours").innerHTML = setHours;
     }
 }
 
