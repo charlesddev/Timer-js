@@ -2,6 +2,7 @@ const startButton = document.getElementById("startButton");
 const stopButton = document.getElementById("stopButton");
 const resetButton = document.getElementById("resetButton");
 
+let setCentiSeconds = parseInt(document.getElementById("centiseconds").innerHTML);
 let setSeconds = parseInt(document.getElementById("seconds").innerHTML);
 let setMinutes = parseInt(document.getElementById("minutes").innerHTML);
 let setHours = parseInt(document.getElementById("hours").innerHTML);
@@ -14,8 +15,17 @@ resetButton.addEventListener("click", resetTimer);
 stopButton.style.display = "none";
 resetButton.style.display = "none";
 
+function fakeCentiSecs() {
+    setCentiSeconds++;
+    if (setCentiSeconds < 10) {
+        document.getElementById("centiseconds").innerHTML = setCentiSeconds;
+    } else {
+        setCentiSeconds = 0;
+    }
+}
 
 function myTimer() {
+
     setSeconds++;
     if (setSeconds < 10) {
         document.getElementById("seconds").innerHTML = "0" + setSeconds;
@@ -46,6 +56,7 @@ function myTimer() {
 
 function startTimer() {
     clear = setInterval(myTimer, 1000)
+    clearCentiSecs = setInterval(fakeCentiSecs, 100)
     startButton.style.display = "none";
     stopButton.style.display = "initial";
     resetButton.style.display = "initial";
@@ -59,9 +70,12 @@ function stopTimer() {
 
 function resetTimer() {
     clearInterval(clear);
+    clearInterval(clearCentiSecs);
+    setCentiSeconds = 0;
     setSeconds = 0;
     setMinutes = 0;
     setHours = 0;
+    document.getElementById("centiseconds").innerHTML = "00";
     document.getElementById("seconds").innerHTML = "00";
     document.getElementById("minutes").innerHTML = "00";
     document.getElementById("hours").innerHTML = "00";
