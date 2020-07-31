@@ -1,8 +1,10 @@
 const startButton = document.getElementById("startButton");
 const stopButton = document.getElementById("stopButton");
 const resetButton = document.getElementById("resetButton");
-let setTime = document.getElementById("time").innerHTML;
-let setTimeFixed;
+
+let setSeconds = parseInt(document.getElementById("seconds").innerHTML);
+let setMinutes = parseInt(document.getElementById("minutes").innerHTML);
+let setHours = parseInt(document.getElementById("hours").innerHTML);
 let clear;
 
 startButton.addEventListener("click", startTimer);
@@ -14,14 +16,36 @@ resetButton.style.display = "none";
 
 
 function myTimer() {
-    setTime = parseFloat(setTime);
-    setTime += 0.1;
-    setTimeFixed = setTime.toFixed(1);
-    document.getElementById("time").innerHTML = setTimeFixed;
+    setSeconds++;
+    if (setSeconds < 10) {
+        document.getElementById("seconds").innerHTML = "0" + setSeconds;
+    } else {
+        document.getElementById("seconds").innerHTML = setSeconds;
+    }
+
+    if (setSeconds == 60) {
+        setSeconds = "0" + 0;
+        setMinutes++;
+        if (setMinutes < 10) {
+            document.getElementById("minutes").innerHTML = "0" + setMinutes;
+        } else {
+            document.getElementById("minutes").innerHTML = setMinutes;
+        }
+    }
+
+    if (setMinutes == 60) {
+        setMinutes = "0" + 0;
+        setHours++;
+        if (setHours < 10) {
+            document.getElementById("hours").innerHTML = "0" + setHours;
+        } else {
+            document.getElementById("hours").innerHTML = setHours;
+        }
+    }
 }
 
 function startTimer() {
-    clear = setInterval(myTimer, 100)
+    clear = setInterval(myTimer, 1000)
     startButton.style.display = "none";
     stopButton.style.display = "initial";
     resetButton.style.display = "initial";
@@ -35,8 +59,12 @@ function stopTimer() {
 
 function resetTimer() {
     clearInterval(clear);
-    setTime = 0;
-    document.getElementById("time").innerHTML = setTime;
+    setSeconds = 0;
+    setMinutes = 0;
+    setHours = 0;
+    document.getElementById("seconds").innerHTML = "00";
+    document.getElementById("minutes").innerHTML = "00";
+    document.getElementById("hours").innerHTML = "00";
     startButton.style.display = "initial";
     stopButton.style.display = "none";
     resetButton.style.display = "none";
