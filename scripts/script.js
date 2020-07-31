@@ -8,6 +8,8 @@ let setMinutes = parseInt(document.getElementById("minutes").innerHTML);
 let setHours = parseInt(document.getElementById("hours").innerHTML);
 let clear;
 
+setSeconds = 55;
+
 startButton.addEventListener("click", startTimer);
 stopButton.addEventListener("click", stopTimer);
 resetButton.addEventListener("click", resetTimer);
@@ -64,6 +66,7 @@ function startTimer() {
 
 function stopTimer() {
     clearInterval(clear);
+    clearInterval(clearCentiSecs);
     startButton.style.display = "initial";
     stopButton.style.display = "none";
 }
@@ -75,7 +78,7 @@ function resetTimer() {
     setSeconds = 0;
     setMinutes = 0;
     setHours = 0;
-    document.getElementById("centiseconds").innerHTML = "00";
+    document.getElementById("centiseconds").innerHTML = "0";
     document.getElementById("seconds").innerHTML = "00";
     document.getElementById("minutes").innerHTML = "00";
     document.getElementById("hours").innerHTML = "00";

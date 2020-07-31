@@ -5,16 +5,38 @@
 
 #time {
     font-size: 80px;
+    background-color: black;
+    color: white;
+    border: solid black 2px;
+    border-radius: 40px;
+    width: 40%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 #timerJs button {
     color: white;
-    background-color: black;
     font-size: 30px;
     font-weight: bold;
+    border: solid black 5px;
+    border-radius: 40px;
+    padding: 1%;
 }
 
 #timerJs button:hover {
     transform: scale(1.02);
     cursor: pointer;
+}
+
+#startButton {
+    background-color: green;
+}
+
+#stopButton {
+    background-color: red;
+}
+
+#resetButton {
+    background-color: blue;
 }
